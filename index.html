@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mintly محول العملات السوري</title>
     
-    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
     <style>
-        
         :root {
             --bg-body: #0f0f0f;
             --bg-card: #1a1a1a;
@@ -36,7 +34,6 @@
             background-color: var(--bg-body);
             background-image: radial-gradient(circle at 50% -20%, #2a2a00 0%, transparent 60%);
             color: var(--text-main);
-            
             height: 100dvh; 
             width: 100vw;
             overflow: hidden;
@@ -61,7 +58,6 @@
             justify-content: space-between;
         }
 
-        
         .brand-logo {
             position: absolute;
             top: 15px;
@@ -76,7 +72,6 @@
             z-index: 10;
         }
 
-       
         h1 {
             text-align: center;
             font-weight: 900;
@@ -143,7 +138,6 @@
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
-        
         .custom-select-wrapper {
             position: relative;
             user-select: none;
@@ -180,9 +174,6 @@
         .custom-select.open .custom-select__trigger {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-glow);
-           
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
         }
 
         .arrow {
@@ -196,70 +187,71 @@
         }
 
         .custom-options {
-            position: absolute;
-            display: block;
-            
-            bottom: 100%; 
-            left: 0;
-            right: 0;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 450px;
+            max-height: 80vh;
             background: var(--bg-card);
-            border: 2px solid var(--border);
-            border-bottom: none; 
-            border-radius: var(--radius) var(--radius) 0 0; 
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.9); 
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            box-shadow: 0 0 0 1000px rgba(0,0,0,0.8);
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: translateY(10px);
-            transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
-            max-height: 250px; 
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             overflow-y: auto;
-            z-index: 9999;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
         }
 
         .custom-select.open .custom-options {
+            transform: translate(-50%, -50%) scale(1);
             opacity: 1;
             visibility: visible;
             pointer-events: all;
-            transform: translateY(0);
         }
 
-        .custom-options::-webkit-scrollbar { width: 6px; }
+        .custom-options::-webkit-scrollbar { width: 8px; }
         .custom-options::-webkit-scrollbar-track { background: var(--bg-input); }
-        .custom-options::-webkit-scrollbar-thumb { background-color: var(--border); border-radius: 3px; }
+        .custom-options::-webkit-scrollbar-thumb { background-color: var(--accent); border-radius: 4px; }
 
         .custom-option {
             position: relative;
             display: flex;
             align-items: center;
-            padding: 10px 15px;
-            font-size: 0.9rem;
+            padding: 15px 20px;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .custom-option:last-child { border-bottom: none; }
 
         .custom-option:hover {
-            background-color: rgba(255, 183, 0, 0.08);
+            background-color: rgba(255, 183, 0, 0.1);
             color: var(--text-main);
-            padding-right: 20px;
+            padding-right: 25px;
         }
 
         .custom-option.selected {
             color: var(--accent);
-            background-color: rgba(255, 183, 0, 0.12);
+            background-color: rgba(255, 183, 0, 0.15);
         }
 
         .flag-icon {
-            width: 24px;
-            height: 18px;
+            width: 32px;
+            height: 24px;
             object-fit: contain; 
-            border-radius: 3px;
-            margin-left: 10px;
+            border-radius: 4px;
+            margin-left: 15px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
             background-color: #333;
         }
@@ -273,13 +265,12 @@
         .ar-name {
             display: block;
             color: var(--text-muted);
-            font-size: 0.75em;
-            margin-top: 2px;
+            font-size: 0.8em;
+            margin-top: 3px;
             direction: rtl; 
             text-align: right;
         }
 
-        
         .swap-row {
             display: flex;
             justify-content: center;
@@ -310,7 +301,6 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        
         .btn-convert {
             width: 100%;
             padding: 12px; 
@@ -331,7 +321,6 @@
             transform: scale(0.98);
         }
 
-        
         .result-box {
             margin-top: 10px; 
             padding-top: 15px;
@@ -395,17 +384,30 @@
             font-weight: 700;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             transition: 0.4s;
-            z-index: 20000;
+            z-index: 100000;
             font-size: 0.85rem;
         }
         .toast.active { transform: translateX(-50%) translateY(0); }
+
+        .close-modal {
+            text-align: center;
+            padding: 15px;
+            color: var(--accent);
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 5px;
+            flex-shrink: 0;
+        }
+        .close-modal:active {
+            opacity: 0.7;
+        }
 
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        
         <img src="https://i.postimg.cc/zf3hy2pW/images-(1).jpg" class="brand-logo" alt="Mintly Logo">
 
         <div style="flex-shrink: 0;">
@@ -481,7 +483,6 @@
         const rateDisplay = document.getElementById('rateDisplay');
         const toast = document.getElementById('toast');
 
-        
         const arabicNames = {
             AED: "درهم إماراتي", AFN: "أفغاني", ALL: "ليك ألباني", AMD: "درام أرميني", ANG: "جيلدر هولندي", AOA: "كوانزا أنغولي", ARS: "بيزو أرجنتيني", AUD: "دولار أسترالي", AWG: "جيلدر أروبي", AZN: "مانات أذربيجاني",
             BAM: "مارك قابل للتحويل", BBD: "دولار بربادوسي", BDT: "تاكا بنغلاديشي", BGN: "ليف بلغاري", BHD: "دينار بحريني", BIF: "فرنك بروندي", BMD: "دولار برمودي", BND: "دولار بروني", BOB: "بوليفيانو", BRL: "ريال برازيلي", BSD: "دولار بهامي", BTC: "بيتكوين", BTN: "نغلتروم بوتاني", BWP: "بولا بوتسواني", BYN: "روبل بلاروسي", BZD: "دولار بليزي",
@@ -539,37 +540,29 @@
         });
 
         function initCustomSelects(currencies) {
-            
             const codes = Object.keys(currencies).filter(code => code !== 'ILS').sort();
             
-            
             const getIconUrl = (code) => {
-                
-                if (code === 'XAU') return 'https://cdn-icons-png.flaticon.com/512/6146/6146333.png'; 
-                if (code === 'XAG') return 'https://cdn-icons-png.flaticon.com/512/6146/6146332.png'; 
-                if (code === 'XPT') return 'https://cdn-icons-png.flaticon.com/512/2633/2633551.png'; 
-                if (code === 'XPD') return 'https://cdn-icons-png.flaticon.com/512/2633/2633548.png'; 
-                
-                
+                if (code === 'XAU') return 'https://cdn-icons-png.flaticon.com/512/6146/6146333.png';
+                if (code === 'XAG') return 'https://cdn-icons-png.flaticon.com/512/6146/6146332.png';
+                if (code === 'XPT') return 'https://cdn-icons-png.flaticon.com/512/2633/2633551.png';
+                if (code === 'XPD') return 'https://cdn-icons-png.flaticon.com/512/2633/2633548.png';
                 if (code === 'BTC') return 'https://cryptologos.cc/logos/bitcoin-btc-logo.png';
                 if (code === 'ETH') return 'https://cryptologos.cc/logos/ethereum-eth-logo.png';
-
-                
-                if (code === 'XDR') return 'https://cdn-icons-png.flaticon.com/512/3550/3550317.png'; 
+                if (code === 'XDR') return 'https://cdn-icons-png.flaticon.com/512/3550/3550317.png';
                 if (code === 'XAF' || code === 'XOF' || code === 'XCD' || code === 'XPF') {
-                    return 'https://cdn-icons-png.flaticon.com/512/2693/2693502.png'; 
+                    return 'https://cdn-icons-png.flaticon.com/512/2693/2693502.png';
                 }
                 if (code.startsWith('X') && code !== 'XXX') {
-                     return 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'; 
+                     return 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
                 }
-
-                
                 const countryCode = code.substring(0, 2).toLowerCase();
                 return `https://flagcdn.com/w40/${countryCode}.png`;
             };
 
             const createListHTML = () => {
-                return codes.map(code => {
+                let closeBtn = `<div class="close-modal">✕ إغلاق</div>`;
+                let list = codes.map(code => {
                     const engName = currencies[code];
                     const araName = arabicNames[code] || engName;
                     const iconUrl = getIconUrl(code);
@@ -584,6 +577,7 @@
                         </span>
                     `;
                 }).join('');
+                return closeBtn + list;
             };
 
             const listHTML = createListHTML();
@@ -602,6 +596,17 @@
             
             optionsContainer.innerHTML = htmlContent;
 
+            const closeModal = () => {
+                wrapper.classList.remove('open');
+                wrapper.parentElement.style.zIndex = 1;
+            };
+
+            const openModal = () => {
+                wrapper.classList.add('open');
+                wrapper.parentElement.style.zIndex = 1000;
+                optionsContainer.scrollTop = 0;
+            };
+
             wrapper.querySelector('.custom-select__trigger').addEventListener('click', function(e) {
                 e.stopPropagation();
                 document.querySelectorAll('.custom-select').forEach(el => {
@@ -611,15 +616,14 @@
                     }
                 });
 
-                const isOpen = wrapper.classList.contains('open');
-                if (isOpen) {
-                    wrapper.classList.remove('open');
-                    wrapper.parentElement.style.zIndex = 1;
+                if (wrapper.classList.contains('open')) {
+                    closeModal();
                 } else {
-                    wrapper.classList.add('open');
-                    wrapper.parentElement.style.zIndex = 1000;
+                    openModal();
                 }
             });
+
+            wrapper.querySelector('.close-modal').addEventListener('click', closeModal);
 
             wrapper.querySelectorAll('.custom-option').forEach(option => {
                 option.addEventListener('click', function() {
@@ -635,8 +639,7 @@
                     `;
 
                     callback(value);
-                    wrapper.classList.remove('open');
-                    wrapper.parentElement.style.zIndex = 1;
+                    closeModal();
                 });
             });
         }
@@ -648,12 +651,12 @@
         }
 
         window.addEventListener('click', function(e) {
-            document.querySelectorAll('.custom-select').forEach(el => {
-                if (!el.contains(e.target)) {
+            if (!e.target.closest('.custom-select')) {
+                document.querySelectorAll('.custom-select').forEach(el => {
                     el.classList.remove('open');
                     el.parentElement.style.zIndex = 1;
-                }
-            });
+                });
+            }
         });
 
         async function performConvert() {
