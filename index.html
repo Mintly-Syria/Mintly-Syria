@@ -6,7 +6,7 @@
     <title>Mintly محول العملات السوري</title>
     
     <!-- خط Cairo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=200;300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
     <style>
         /* --- الثيم الذهبي الفاخر --- */
@@ -19,7 +19,7 @@
             --border: #333;
             --accent: #ffb700;
             --accent-glow: rgba(255, 183, 0, 0.15);
-            --radius: 20px;
+            --radius: 18px;
             --result-color: #ffd700;
             --font-numbers: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -36,33 +36,38 @@
             background-color: var(--bg-body);
             background-image: radial-gradient(circle at 50% -20%, #2a2a00 0%, transparent 60%);
             color: var(--text-main);
-            min-height: 100vh;
+            /* إصلاح ارتفاع الشاشة لمنع التمرير */
+            height: 100dvh; 
+            width: 100vw;
+            overflow: hidden; /* منع السكرول */
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             padding: 10px;
         }
 
         .app-container {
             width: 100%;
             max-width: 480px;
+            height: 100%; /* يملأ الشاشة */
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 40px 25px 30px 25px;
+            border-radius: 20px;
+            padding: 35px 20px 20px 20px; /* تقليل الحشوة الجانبية */
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
             position: relative;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column; /* ترتيب عمودي */
+            justify-content: space-between; /* توزيع العناصر بالتساوي */
         }
 
         /* --- الشعار في الزاوية اليسرى العلوية --- */
         .brand-logo {
             position: absolute;
-            top: 20px;
-            left: 20px; 
-            width: 50px;
-            height: 50px;
+            top: 15px;
+            left: 15px; 
+            width: 40px; /* تصغير الصورة قليلاً */
+            height: 40px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--accent);
@@ -75,34 +80,44 @@
         h1 {
             text-align: center;
             font-weight: 900;
-            font-size: 1.8rem;
+            font-size: 1.6rem; /* تصغير قليل */
             margin-bottom: 0px; 
             margin-top: 10px;
             color: var(--text-main);
             text-shadow: 0 0 15px var(--accent-glow);
             letter-spacing: -0.5px;
+            flex-shrink: 0;
         }
 
         h2 {
             text-align: center;
-            font-weight: 300; /* خط رفيع جداً */
-            font-size: 1.1rem; /* حجم صغير */
-            margin-bottom: 35px;
+            font-weight: 300;
+            font-size: 1rem; /* تصغير */
+            margin-bottom: 15px; /* تقليل المسافة */
             color: var(--text-muted);
             letter-spacing: 1px;
             text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .content-wrapper {
+            flex: 1; /* يأخذ المساحة المتبقية */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* توسيط المحتوى عمودياً */
+            overflow-y: hidden; /* منع التمرير داخل المحتوى */
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* تقليل المسافة بين الحقول */
             position: relative;
         }
 
         label {
             display: block;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
             font-weight: 600;
             padding-right: 5px;
         }
@@ -112,9 +127,9 @@
             background: var(--bg-input);
             border: 2px solid var(--border);
             color: var(--text-main);
-            padding: 16px 15px;
+            padding: 10px 15px; /* تقليل الحشوة */
             border-radius: var(--radius);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             font-family: var(--font-numbers);
             direction: ltr;
@@ -125,14 +140,15 @@
         
         .styled-input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-glow);
+            box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
-        /* --- القائمة المخصصة --- */
+        /* --- القائمة المخصصة (تظهر للأعلى) --- */
         .custom-select-wrapper {
             position: relative;
             user-select: none;
             width: 100%;
+            z-index: 100;
         }
 
         .custom-select {
@@ -146,8 +162,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 15px;
-            font-size: 1rem;
+            padding: 10px 15px; /* تقليل الحشوة */
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-main);
             background: var(--bg-input);
@@ -163,13 +179,14 @@
 
         .custom-select.open .custom-select__trigger {
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-glow);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
+            box-shadow: 0 0 0 3px var(--accent-glow);
+            /* عند الفتح، نزيل الحواف العلوية ليتصل بالقائمة التي ستظهر فوقه */
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
         }
 
         .arrow {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             transition: transform 0.3s;
         }
@@ -181,20 +198,21 @@
         .custom-options {
             position: absolute;
             display: block;
-            top: 100%;
+            /* تغيير الموضع: تظهر للأعلى فوق الحقل بدلاً من الأسفل */
+            bottom: 100%; 
             left: 0;
             right: 0;
             background: var(--bg-card);
             border: 2px solid var(--border);
-            border-top: none;
-            border-radius: 0 0 var(--radius) var(--radius);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.9);
+            border-bottom: none; /* إلغاء الحافة السفلية لاتصالها بالـ trigger */
+            border-radius: var(--radius) var(--radius) 0 0; /* حواف دائرية في الأعلى فقط */
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.9); /* ظل للأعلى */
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: translateY(-10px);
+            transform: translateY(10px);
             transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
-            max-height: 280px;
+            max-height: 250px; /* تحديد ارتفاع القائمة */
             overflow-y: auto;
             z-index: 9999;
         }
@@ -214,8 +232,8 @@
             position: relative;
             display: flex;
             align-items: center;
-            padding: 12px 15px;
-            font-size: 0.95rem;
+            padding: 10px 15px;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
@@ -237,11 +255,11 @@
         }
 
         .flag-icon {
-            width: 26px;
-            height: 19px;
+            width: 24px;
+            height: 18px;
             object-fit: contain; 
             border-radius: 3px;
-            margin-left: 12px;
+            margin-left: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
             background-color: #333;
         }
@@ -255,7 +273,7 @@
         .ar-name {
             display: block;
             color: var(--text-muted);
-            font-size: 0.8em;
+            font-size: 0.75em;
             margin-top: 2px;
             direction: rtl; 
             text-align: right;
@@ -265,19 +283,19 @@
         .swap-row {
             display: flex;
             justify-content: center;
-            margin: -5px 0 15px 0;
+            margin: -5px 0 10px 0; /* تقليل المسافات */
             position: relative;
             z-index: 1;
         }
 
         .btn-swap {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px; /* تصغير */
             border-radius: 50%;
             background: var(--bg-card);
             border: 2px solid var(--border);
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -295,17 +313,18 @@
         /* --- زر التحويل --- */
         .btn-convert {
             width: 100%;
-            padding: 16px;
+            padding: 12px; /* تقليل الحشوة */
             background: linear-gradient(135deg, var(--accent), #d97706);
             color: #000;
             border: none;
             border-radius: var(--radius);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 800;
             cursor: pointer;
-            margin-top: 10px;
-            box-shadow: 0 8px 20px -5px rgba(255, 183, 0, 0.4);
+            margin-top: 5px;
+            box-shadow: 0 5px 15px -5px rgba(255, 183, 0, 0.4);
             transition: transform 0.2s, box-shadow 0.2s;
+            flex-shrink: 0;
         }
 
         .btn-convert:active {
@@ -314,13 +333,14 @@
 
         /* --- النتائج --- */
         .result-box {
-            margin-top: 35px;
-            padding-top: 25px;
+            margin-top: 10px; /* تقليل المسافة */
+            padding-top: 15px;
             border-top: 1px solid var(--border);
             text-align: center;
             opacity: 0;
             transform: translateY(15px);
             transition: all 0.5s;
+            flex-shrink: 0;
         }
 
         .result-box.show {
@@ -329,31 +349,31 @@
         }
 
         .result-amount {
-            font-size: 2.8rem;
+            font-size: 2.2rem; /* تصغير النتيجة لتناسب الشاشة */
             font-weight: 900;
             color: var(--result-color);
             line-height: 1.1;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
             text-shadow: 0 0 20px var(--accent-glow);
             font-family: var(--font-numbers);
             word-break: break-all;
         }
 
         .rate-display {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             background: var(--bg-input);
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: 50px;
             border: 1px solid var(--border);
             display: inline-block;
-            margin-top: 8px;
+            margin-top: 5px;
         }
 
         .loader {
             display: none;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border: 3px solid rgba(0,0,0,0.3);
             border-radius: 50%;
             border-top-color: #000;
@@ -370,13 +390,13 @@
             background: var(--bg-card);
             color: var(--text-main);
             border: 1px solid var(--accent);
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 50px;
             font-weight: 700;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             transition: 0.4s;
             z-index: 20000;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .toast.active { transform: translateX(-50%) translateY(0); }
 
@@ -388,52 +408,58 @@
         <!-- الصورة في الزاوية اليسرى العلوية -->
         <img src="https://i.postimg.cc/zf3hy2pW/images-(1).jpg" class="brand-logo" alt="Mintly Logo">
 
-        <h1>Mintly-Syria</h1>
-        <h2>محول العملات السوري</h2>
-
-        <div class="input-group">
-            <label>المبلغ (Amount)</label>
-            <input type="number" id="amount" class="styled-input" value="1" placeholder="0.00" lang="en">
+        <div style="flex-shrink: 0;">
+            <h1>Mintly-Syria</h1>
+            <h2>محول العملات السوري</h2>
         </div>
 
-        <div class="input-group">
-            <label>من (From)</label>
-            <div class="custom-select-wrapper">
-                <div class="custom-select" id="fromSelect">
-                    <div class="custom-select__trigger">
-                        <span>اختر العملة</span>
-                        <span class="arrow">▼</span>
+        <div class="content-wrapper">
+            <div class="input-group">
+                <label>المبلغ (Amount)</label>
+                <input type="number" id="amount" class="styled-input" value="1" placeholder="0.00" lang="en">
+            </div>
+
+            <div class="input-group">
+                <label>من (From)</label>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select" id="fromSelect">
+                        <div class="custom-select__trigger">
+                            <span>اختر العملة</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="custom-options"></div>
                     </div>
-                    <div class="custom-options"></div>
+                </div>
+            </div>
+
+            <div class="swap-row">
+                <button class="btn-swap" id="swapBtn">⇄</button>
+            </div>
+
+            <div class="input-group">
+                <label>إلى (To)</label>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select" id="toSelect">
+                        <div class="custom-select__trigger">
+                            <span>اختر العملة</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="custom-options"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="swap-row">
-            <button class="btn-swap" id="swapBtn">⇄</button>
-        </div>
+        <div style="flex-shrink: 0;">
+            <button class="btn-convert" id="convertBtn">
+                <span class="btn-text">Convert Now</span>
+                <div class="loader" id="loader"></div>
+            </button>
 
-        <div class="input-group">
-            <label>إلى (To)</label>
-            <div class="custom-select-wrapper">
-                <div class="custom-select" id="toSelect">
-                    <div class="custom-select__trigger">
-                        <span>اختر العملة</span>
-                        <span class="arrow">▼</span>
-                    </div>
-                    <div class="custom-options"></div>
-                </div>
+            <div class="result-box" id="resultBox">
+                <div class="result-amount" id="resultAmount" lang="en">0.00</div>
+                <div class="rate-display" id="rateDisplay" lang="en">1 USD = --- USD</div>
             </div>
-        </div>
-
-        <button class="btn-convert" id="convertBtn">
-            <span class="btn-text">Convert Now</span>
-            <div class="loader" id="loader"></div>
-        </button>
-
-        <div class="result-box" id="resultBox">
-            <div class="result-amount" id="resultAmount" lang="en">0.00</div>
-            <div class="rate-display" id="rateDisplay" lang="en">1 USD = --- USD</div>
         </div>
     </div>
 
@@ -464,7 +490,7 @@
             EGP: "جنيه مصري", ERN: "ناقفا إريتري", ETB: "بير إثيوبي", EUR: "يورو",
             FJD: "دولار فيجي", FKP: "جنيه جزر فوكلاند", GBP: "جنيه إسترليني", GEL: "لاري جورجي", GGP: "جنيه غرنزي", GHS: "سيدي غاني", GIP: "جنيه جبل طارق", GMD: "دالاسي غامبي", GNF: "فرنك غيني", GTQ: "كيتزال غواتيمالي", GYD: "دولار غيانا",
             HKD: "دولار هونغ كونغي", HNL: "لمبيرا هندوراسية", HRK: "كونا كرواتية", HTG: "غورد هايتي", HUF: "فورنت مجري",
-            IDR: "روبية إندونيسية", IMP: "جنيه مان", INR: "روبية هندية", IQD: "دينار عراقي", IRR: "ريال إيراني", ISK: "كرونة آيسلندية", JEP: "جنيه جيرسي", JMD: "دولار جامايكي", JOD: "دينار أردني", JPY: "ين ياباني",
+            IDR: "روبية إندونيسية", IMP: "جنيه مان", INR: "روبية هندية", IQD: "دينار عراقي", IRR: "ريال إيراني", ISK: "كرونة آيسلندية", JEP: "جنيه جيرزي", JMD: "دولار جامايكي", JOD: "دينار أردني", JPY: "ين ياباني",
             KES: "شلن كيني", KGS: "سوم قرغيزستاني", KHR: "رييل كمبودي", KMF: "فرنك قمري", KPW: "وون كوري شمالي", KRW: "وون كوري جنوبي", KWD: "دينار كويتي", KYD: "دولار جزر كايمان", KZT: "تينغ كازاخستاني",
             LAK: "كيب لاوسي", LBP: "ليرة لبنانية", LKR: "روبية سريلانكية", LRD: "دولار ليبيري", LSL: "لوتي ليسوتو", LYD: "دينار ليبي",
             MAD: "درهم مغربي", MDL: "ليو مولدوفي", MGA: "أرياري مدغشقري", MKD: "دينار مقدوني", MMK: "كيات ميانماري", MNT: "توغريك منغولي", MOP: "باتاكا ماكاوي", MRU: "أوقية موريتانية", MUR: "روبية موريشيوسية", MVR: "روفيية مالديفية", MWK: "كواشا ملاوي", MXN: "بيزو مكسيكي", MYR: "رينغيت ماليزي", MZN: "ميتكال موزمبيقي",
@@ -603,7 +629,7 @@
 
                     trigger.innerHTML = `
                         <div style="display:flex; align-items:center;">
-                            <img src="${imgSrc}" class="flag-icon" style="width:20px; height:14px; margin-left:8px;">
+                            <img src="${imgSrc}" class="flag-icon" style="width:18px; height:13px; margin-left:8px;">
                             ${value} - ${araName}
                         </div>
                     `;
