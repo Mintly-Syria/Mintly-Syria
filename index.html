@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mintly محول العملات السوري</title>
     
-    <!-- خط Cairo -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* --- الثيم الذهبي الفاخر --- */
+        
         :root {
             --bg-body: #0f0f0f;
             --bg-card: #1a1a1a;
             --bg-input: #252525;
-            --text-main: #ffd700; /* ذهبي */
+            --text-main: #ffd700; 
             --text-muted: #b0b0b0;
             --border: #333;
             --accent: #ffb700;
@@ -36,10 +36,10 @@
             background-color: var(--bg-body);
             background-image: radial-gradient(circle at 50% -20%, #2a2a00 0%, transparent 60%);
             color: var(--text-main);
-            /* إصلاح ارتفاع الشاشة لمنع التمرير */
+            
             height: 100dvh; 
             width: 100vw;
-            overflow: hidden; /* منع السكرول */
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -49,24 +49,24 @@
         .app-container {
             width: 100%;
             max-width: 480px;
-            height: 100%; /* يملأ الشاشة */
+            height: 100%; 
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 35px 20px 20px 20px; /* تقليل الحشوة الجانبية */
+            padding: 35px 20px 20px 20px; 
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
             position: relative;
             display: flex;
-            flex-direction: column; /* ترتيب عمودي */
-            justify-content: space-between; /* توزيع العناصر بالتساوي */
+            flex-direction: column; 
+            justify-content: space-between;
         }
 
-        /* --- الشعار في الزاوية اليسرى العلوية --- */
+        
         .brand-logo {
             position: absolute;
             top: 15px;
             left: 15px; 
-            width: 40px; /* تصغير الصورة قليلاً */
+            width: 40px; 
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
@@ -76,11 +76,11 @@
             z-index: 10;
         }
 
-        /* --- تنسيق العناوين --- */
+       
         h1 {
             text-align: center;
             font-weight: 900;
-            font-size: 1.6rem; /* تصغير قليل */
+            font-size: 1.6rem; 
             margin-bottom: 0px; 
             margin-top: 10px;
             color: var(--text-main);
@@ -92,8 +92,8 @@
         h2 {
             text-align: center;
             font-weight: 300;
-            font-size: 1rem; /* تصغير */
-            margin-bottom: 15px; /* تقليل المسافة */
+            font-size: 1rem;
+            margin-bottom: 15px; 
             color: var(--text-muted);
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -101,15 +101,15 @@
         }
 
         .content-wrapper {
-            flex: 1; /* يأخذ المساحة المتبقية */
+            flex: 1; 
             display: flex;
             flex-direction: column;
-            justify-content: center; /* توسيط المحتوى عمودياً */
-            overflow-y: hidden; /* منع التمرير داخل المحتوى */
+            justify-content: center; 
+            overflow-y: hidden; 
         }
 
         .input-group {
-            margin-bottom: 10px; /* تقليل المسافة بين الحقول */
+            margin-bottom: 10px; 
             position: relative;
         }
 
@@ -127,7 +127,7 @@
             background: var(--bg-input);
             border: 2px solid var(--border);
             color: var(--text-main);
-            padding: 10px 15px; /* تقليل الحشوة */
+            padding: 10px 15px; 
             border-radius: var(--radius);
             font-size: 1.3rem;
             font-weight: 700;
@@ -143,7 +143,7 @@
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
-        /* --- القائمة المخصصة (تظهر للأعلى) --- */
+        
         .custom-select-wrapper {
             position: relative;
             user-select: none;
@@ -162,7 +162,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 15px; /* تقليل الحشوة */
+            padding: 10px 15px; 
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-main);
@@ -180,7 +180,7 @@
         .custom-select.open .custom-select__trigger {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-glow);
-            /* عند الفتح، نزيل الحواف العلوية ليتصل بالقائمة التي ستظهر فوقه */
+           
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
@@ -198,21 +198,21 @@
         .custom-options {
             position: absolute;
             display: block;
-            /* تغيير الموضع: تظهر للأعلى فوق الحقل بدلاً من الأسفل */
+            
             bottom: 100%; 
             left: 0;
             right: 0;
             background: var(--bg-card);
             border: 2px solid var(--border);
-            border-bottom: none; /* إلغاء الحافة السفلية لاتصالها بالـ trigger */
-            border-radius: var(--radius) var(--radius) 0 0; /* حواف دائرية في الأعلى فقط */
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.9); /* ظل للأعلى */
+            border-bottom: none; 
+            border-radius: var(--radius) var(--radius) 0 0; 
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.9); 
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
             transform: translateY(10px);
             transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
-            max-height: 250px; /* تحديد ارتفاع القائمة */
+            max-height: 250px; 
             overflow-y: auto;
             z-index: 9999;
         }
@@ -279,18 +279,18 @@
             text-align: right;
         }
 
-        /* --- زر التبديل --- */
+        
         .swap-row {
             display: flex;
             justify-content: center;
-            margin: -5px 0 10px 0; /* تقليل المسافات */
+            margin: -5px 0 10px 0; 
             position: relative;
             z-index: 1;
         }
 
         .btn-swap {
             width: 40px;
-            height: 40px; /* تصغير */
+            height: 40px; 
             border-radius: 50%;
             background: var(--bg-card);
             border: 2px solid var(--border);
@@ -310,10 +310,10 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* --- زر التحويل --- */
+        
         .btn-convert {
             width: 100%;
-            padding: 12px; /* تقليل الحشوة */
+            padding: 12px; 
             background: linear-gradient(135deg, var(--accent), #d97706);
             color: #000;
             border: none;
@@ -331,9 +331,9 @@
             transform: scale(0.98);
         }
 
-        /* --- النتائج --- */
+        
         .result-box {
-            margin-top: 10px; /* تقليل المسافة */
+            margin-top: 10px; 
             padding-top: 15px;
             border-top: 1px solid var(--border);
             text-align: center;
@@ -349,7 +349,7 @@
         }
 
         .result-amount {
-            font-size: 2.2rem; /* تصغير النتيجة لتناسب الشاشة */
+            font-size: 2.2rem; 
             font-weight: 900;
             color: var(--result-color);
             line-height: 1.1;
@@ -405,7 +405,7 @@
 <body>
 
     <div class="app-container">
-        <!-- الصورة في الزاوية اليسرى العلوية -->
+        
         <img src="https://i.postimg.cc/zf3hy2pW/images-(1).jpg" class="brand-logo" alt="Mintly Logo">
 
         <div style="flex-shrink: 0;">
@@ -481,7 +481,7 @@
         const rateDisplay = document.getElementById('rateDisplay');
         const toast = document.getElementById('toast');
 
-        // --- قاموس الترجمة العربية (تم حذف العملة الإسرائيلية ILS) ---
+        
         const arabicNames = {
             AED: "درهم إماراتي", AFN: "أفغاني", ALL: "ليك ألباني", AMD: "درام أرميني", ANG: "جيلدر هولندي", AOA: "كوانزا أنغولي", ARS: "بيزو أرجنتيني", AUD: "دولار أسترالي", AWG: "جيلدر أروبي", AZN: "مانات أذربيجاني",
             BAM: "مارك قابل للتحويل", BBD: "دولار بربادوسي", BDT: "تاكا بنغلاديشي", BGN: "ليف بلغاري", BHD: "دينار بحريني", BIF: "فرنك بروندي", BMD: "دولار برمودي", BND: "دولار بروني", BOB: "بوليفيانو", BRL: "ريال برازيلي", BSD: "دولار بهامي", BTC: "بيتكوين", BTN: "نغلتروم بوتاني", BWP: "بولا بوتسواني", BYN: "روبل بلاروسي", BZD: "دولار بليزي",
@@ -539,31 +539,31 @@
         });
 
         function initCustomSelects(currencies) {
-            // تصفية القائمة واستبعاد العملة الإسرائيلية (ILS)
+            
             const codes = Object.keys(currencies).filter(code => code !== 'ILS').sort();
             
-            // --- الدالة المحسنة لجلب الصور المناسبة ---
+            
             const getIconUrl = (code) => {
-                // 1. المعادن الثمينة
-                if (code === 'XAU') return 'https://cdn-icons-png.flaticon.com/512/6146/6146333.png'; // Gold Bar
-                if (code === 'XAG') return 'https://cdn-icons-png.flaticon.com/512/6146/6146332.png'; // Silver Bar
-                if (code === 'XPT') return 'https://cdn-icons-png.flaticon.com/512/2633/2633551.png'; // Platinum
-                if (code === 'XPD') return 'https://cdn-icons-png.flaticon.com/512/2633/2633548.png'; // Palladium
                 
-                // 2. العملات الرقمية
+                if (code === 'XAU') return 'https://cdn-icons-png.flaticon.com/512/6146/6146333.png'; 
+                if (code === 'XAG') return 'https://cdn-icons-png.flaticon.com/512/6146/6146332.png'; 
+                if (code === 'XPT') return 'https://cdn-icons-png.flaticon.com/512/2633/2633551.png'; 
+                if (code === 'XPD') return 'https://cdn-icons-png.flaticon.com/512/2633/2633548.png'; 
+                
+                
                 if (code === 'BTC') return 'https://cryptologos.cc/logos/bitcoin-btc-logo.png';
                 if (code === 'ETH') return 'https://cryptologos.cc/logos/ethereum-eth-logo.png';
 
-                // 3. رموز خاصة واتحادات نقدية
-                if (code === 'XDR') return 'https://cdn-icons-png.flaticon.com/512/3550/3550317.png'; // IMF / Global
+                
+                if (code === 'XDR') return 'https://cdn-icons-png.flaticon.com/512/3550/3550317.png'; 
                 if (code === 'XAF' || code === 'XOF' || code === 'XCD' || code === 'XPF') {
-                    return 'https://cdn-icons-png.flaticon.com/512/2693/2693502.png'; // Bank/Coin icon for regions
+                    return 'https://cdn-icons-png.flaticon.com/512/2693/2693502.png'; 
                 }
                 if (code.startsWith('X') && code !== 'XXX') {
-                     return 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'; // Generic Global/Coin
+                     return 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'; 
                 }
 
-                // 4. الدول العادية
+                
                 const countryCode = code.substring(0, 2).toLowerCase();
                 return `https://flagcdn.com/w40/${countryCode}.png`;
             };
@@ -592,7 +592,7 @@
             setupCustomSelect('toSelect', listHTML, (val) => { selectedTo = val; });
 
             selectOption('fromSelect', 'USD');
-            selectOption('toSelect', 'XAU'); // الافتراضي ذهب للتجربة
+            selectOption('toSelect', 'XAU'); 
         }
 
         function setupCustomSelect(elementId, htmlContent, callback) {
