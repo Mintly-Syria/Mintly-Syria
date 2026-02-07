@@ -54,6 +54,7 @@
             position: relative;
         }
 
+        /* --- تحسينات العنوان لإضافة الصورة --- */
         h1 {
             text-align: center;
             font-weight: 1000;
@@ -61,6 +62,23 @@
             margin-bottom: 5px;
             color: var(--text-main);
             text-shadow: 0 0 10px var(--accent-glow);
+            
+            /* لجعل النص والصورة بجانب بعضهما بشكل متناسق */
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            gap: 90px; /* مسافة بين النص والصورة */
+        }
+
+        /* تنسيق الصورة الدائرية */
+        .brand-logo {
+            width: 45px;  /* حجم الصورة */
+            height: 45px;
+            border-radius: 50%; /* لتصبح دائرية */
+            object-fit: cover; /* لمنع تشوه الصورة */
+            border: 2px solid var(--accent); /* إطار ذهبي خفيف */
+            box-shadow: 0 0 8px rgba(255, 183, 0, 0.2);
+            background-color: #000;
         }
 
         h2 {
@@ -70,7 +88,6 @@
             margin-bottom: 30px;
             color: var(--text-main);
             text-shadow: 0 0 10px var(--accent-glow);
-
         }
 
         .input-group {
@@ -217,7 +234,7 @@
         .flag-icon {
             width: 28px;
             height: 20px;
-            object-fit: contain; /* تغيير من cover إلى contain لضمان ظهور الأيقونة كاملة */
+            object-fit: contain; 
             border-radius: 3px;
             margin-left: 12px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -362,12 +379,18 @@
 <body>
 
     <div class="app-container">
-        <h1>Mintly</h1>
+        <!-- تم إضافة الصورة هنا -->
+        <h1>
+            Mintly-Syria
+            <!-- ملاحظة: استبدل الرابط أدناه برابط الصورة الخاص بك إذا أردت -->
+            <img src="https://i.postimg.cc/zf3hy2pW/images-(1).jpg" class="brand-logo" alt="Mintly Logo">
+        </h1>
+        
         <h2>محول العملات السوري</h2>
 
         <div class="input-group">
             <label>المبلغ (Amount)</label>
-            <input type="number" id="amount" class="styled-input" value="1000" placeholder="0.00">
+            <input type="number" id="amount" class="styled-input" value="1" placeholder="0.00">
         </div>
 
         <div class="input-group">
