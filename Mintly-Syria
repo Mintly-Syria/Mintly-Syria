@@ -2,24 +2,22 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mintly محول العملات السوري</title>
     
-    <!-- خط Cairo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* --- الثيم الذهبي الفاخر --- */
         :root {
-            --bg-body: #121212;
-            --bg-card: #1e1e1e;
-            --bg-input: #2a2a2a;
-            --text-main: #ffd700; /* ذهبي */
-            --text-muted: #a3a3a3;
-            --border: #444;
+            --bg-body: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --bg-input: #252525;
+            --text-main: #ffd700; 
+            --text-muted: #b0b0b0;
+            --border: #333;
             --accent: #ffb700;
-            --accent-glow: rgba(255, 183, 0, 0.3);
-            --radius: 16px;
+            --accent-glow: rgba(255, 183, 0, 0.15);
+            --radius: 18px;
             --result-color: #ffd700;
             --font-numbers: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -34,73 +32,89 @@
 
         body {
             background-color: var(--bg-body);
-            background-image: radial-gradient(circle at 50% 0%, #2a2a00 0%, transparent 50%);
+            background-image: radial-gradient(circle at 50% -20%, #2a2a00 0%, transparent 60%);
             color: var(--text-main);
-            min-height: 100vh;
+            height: 100dvh; 
+            width: 100vw;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 10px;
         }
 
         .app-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
+            height: 100%; 
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 30px;
-            padding: 35px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            padding: 35px 20px 20px 20px; 
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
             position: relative;
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between;
         }
 
-        /* --- تحسينات العنوان لإضافة الصورة --- */
+        .brand-logo {
+            position: absolute;
+            top: 15px;
+            left: 15px; 
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 15px rgba(255, 183, 0, 0.2);
+            background-color: #000;
+            z-index: 10;
+        }
+
         h1 {
             text-align: center;
-            font-weight: 1000;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+            font-weight: 900;
+            font-size: 1.6rem; 
+            margin-bottom: 0px; 
+            margin-top: 10px;
             color: var(--text-main);
-            text-shadow: 0 0 10px var(--accent-glow);
-            
-            /* لجعل النص والصورة بجانب بعضهما بشكل متناسق */
-            display: flex;
-            align-items: center;
-            justify-content: left;
-            gap: 90px; /* مسافة بين النص والصورة */
-        }
-
-        /* تنسيق الصورة الدائرية */
-        .brand-logo {
-            width: 45px;  /* حجم الصورة */
-            height: 45px;
-            border-radius: 50%; /* لتصبح دائرية */
-            object-fit: cover; /* لمنع تشوه الصورة */
-            border: 2px solid var(--accent); /* إطار ذهبي خفيف */
-            box-shadow: 0 0 8px rgba(255, 183, 0, 0.2);
-            background-color: #000;
+            text-shadow: 0 0 15px var(--accent-glow);
+            letter-spacing: -0.5px;
+            flex-shrink: 0;
         }
 
         h2 {
             text-align: center;
-            font-weight: 100;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: var(--text-main);
-            text-shadow: 0 0 10px var(--accent-glow);
+            font-weight: 300;
+            font-size: 1rem;
+            margin-bottom: 15px; 
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .content-wrapper {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            overflow-y: hidden; 
         }
 
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 10px; 
             position: relative;
         }
 
         label {
             display: block;
             color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-bottom: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
             font-weight: 600;
+            padding-right: 5px;
         }
 
         .styled-input {
@@ -108,26 +122,27 @@
             background: var(--bg-input);
             border: 2px solid var(--border);
             color: var(--text-main);
-            padding: 18px 20px;
+            padding: 10px 15px; 
             border-radius: var(--radius);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             font-family: var(--font-numbers);
             direction: ltr;
             text-align: right;
             outline: none;
+            transition: border-color 0.3s;
         }
         
         .styled-input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-glow);
+            box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
-        /* --- القائمة المخصصة --- */
         .custom-select-wrapper {
             position: relative;
             user-select: none;
             width: 100%;
+            z-index: 100;
         }
 
         .custom-select {
@@ -141,8 +156,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
-            font-size: 1rem;
+            padding: 10px 15px; 
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-main);
             background: var(--bg-input);
@@ -153,18 +168,16 @@
         }
 
         .custom-select__trigger:hover {
-            border-color: #666;
+            border-color: #555;
         }
 
         .custom-select.open .custom-select__trigger {
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-glow);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
+            box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
         .arrow {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             transition: transform 0.3s;
         }
@@ -174,43 +187,72 @@
         }
 
         .custom-options {
-            position: absolute;
-            display: block;
-            top: 100%;
-            left: 0;
-            right: 0;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 450px;
+            max-height: 80vh;
             background: var(--bg-card);
-            border: 2px solid var(--border);
-            border-top: none;
-            border-radius: 0 0 var(--radius) var(--radius);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            box-shadow: 0 0 0 1000px rgba(0,0,0,0.8);
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: translateY(-10px);
             transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-            max-height: 300px;
             overflow-y: auto;
-            z-index: 9999;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
         }
 
         .custom-select.open .custom-options {
+            transform: translate(-50%, -50%) scale(1);
             opacity: 1;
             visibility: visible;
             pointer-events: all;
-            transform: translateY(0);
         }
 
         .custom-options::-webkit-scrollbar { width: 8px; }
         .custom-options::-webkit-scrollbar-track { background: var(--bg-input); }
-        .custom-options::-webkit-scrollbar-thumb { background-color: var(--border); border-radius: 4px; }
+        .custom-options::-webkit-scrollbar-thumb { background-color: var(--accent); border-radius: 4px; }
+
+        /* تنسيق شريط البحث */
+        .currency-search-container {
+            padding: 10px 15px;
+            background: var(--bg-card);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .currency-search {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-family: 'Cairo', sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .currency-search:focus {
+            border-color: var(--accent);
+        }
 
         .custom-option {
             position: relative;
             display: flex;
             align-items: center;
             padding: 15px 20px;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
@@ -232,11 +274,11 @@
         }
 
         .flag-icon {
-            width: 28px;
-            height: 20px;
+            width: 32px;
+            height: 24px;
             object-fit: contain; 
-            border-radius: 3px;
-            margin-left: 12px;
+            border-radius: 4px;
+            margin-left: 15px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
             background-color: #333;
         }
@@ -250,34 +292,33 @@
         .ar-name {
             display: block;
             color: var(--text-muted);
-            font-size: 0.85em;
-            margin-top: 2px;
+            font-size: 0.8em;
+            margin-top: 3px;
             direction: rtl; 
             text-align: right;
         }
 
-        /* --- زر التبديل --- */
         .swap-row {
             display: flex;
             justify-content: center;
-            margin: -10px 0 20px 0;
+            margin: -5px 0 10px 0; 
             position: relative;
             z-index: 1;
         }
 
         .btn-swap {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px; 
             border-radius: 50%;
             background: var(--bg-card);
             border: 2px solid var(--border);
             color: var(--text-muted);
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.4s;
+            transition: all 0.3s;
         }
 
         .btn-swap:hover {
@@ -287,36 +328,35 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* --- زر التحويل --- */
         .btn-convert {
             width: 100%;
-            padding: 18px;
+            padding: 12px; 
             background: linear-gradient(135deg, var(--accent), #d97706);
             color: #000;
             border: none;
             border-radius: var(--radius);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 800;
             cursor: pointer;
-            margin-top: 10px;
-            box-shadow: 0 10px 20px -5px var(--accent-glow);
+            margin-top: 5px;
+            box-shadow: 0 5px 15px -5px rgba(255, 183, 0, 0.4);
             transition: transform 0.2s, box-shadow 0.2s;
+            flex-shrink: 0;
         }
 
-        .btn-convert:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px -5px var(--accent-glow);
+        .btn-convert:active {
+            transform: scale(0.98);
         }
 
-        /* --- النتائج --- */
         .result-box {
-            margin-top: 40px;
-            padding-top: 30px;
+            margin-top: 10px; 
+            padding-top: 15px;
             border-top: 1px solid var(--border);
             text-align: center;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s;
+            transform: translateY(15px);
+            transition: all 0.5s;
+            flex-shrink: 0;
         }
 
         .result-box.show {
@@ -325,30 +365,31 @@
         }
 
         .result-amount {
-            font-size: 3.2rem;
+            font-size: 2.2rem; 
             font-weight: 900;
             color: var(--result-color);
             line-height: 1.1;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
             text-shadow: 0 0 20px var(--accent-glow);
             font-family: var(--font-numbers);
+            word-break: break-all;
         }
 
         .rate-display {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             background: var(--bg-input);
-            padding: 8px 16px;
+            padding: 4px 12px;
             border-radius: 50px;
             border: 1px solid var(--border);
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .loader {
             display: none;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border: 3px solid rgba(0,0,0,0.3);
             border-radius: 50%;
             border-top-color: #000;
@@ -365,72 +406,89 @@
             background: var(--bg-card);
             color: var(--text-main);
             border: 1px solid var(--accent);
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 50px;
             font-weight: 700;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             transition: 0.4s;
-            z-index: 20000;
+            z-index: 100000;
+            font-size: 0.85rem;
         }
         .toast.active { transform: translateX(-50%) translateY(0); }
+
+        .close-modal {
+            text-align: center;
+            padding: 15px;
+            color: var(--accent);
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0px;
+            flex-shrink: 0;
+        }
+        .close-modal:active {
+            opacity: 0.7;
+        }
 
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- تم إضافة الصورة هنا -->
-        <h1>
-            Mintly-Syria
-            <!-- ملاحظة: استبدل الرابط أدناه برابط الصورة الخاص بك إذا أردت -->
-            <img src="https://i.postimg.cc/zf3hy2pW/images-(1).jpg" class="brand-logo" alt="Mintly Logo">
-        </h1>
-        
-        <h2>محول العملات السوري</h2>
+        <img src="https://i.postimg.cc/zf3hy2pW/images-(1).jpg" class="brand-logo" alt="Mintly Logo">
 
-        <div class="input-group">
-            <label>المبلغ (Amount)</label>
-            <input type="number" id="amount" class="styled-input" value="1" placeholder="0.00">
+        <div style="flex-shrink: 0;">
+            <h1>Mintly-Syria</h1>
+            <h2>محول العملات السوري</h2>
         </div>
 
-        <div class="input-group">
-            <label>من (From)</label>
-            <div class="custom-select-wrapper">
-                <div class="custom-select" id="fromSelect">
-                    <div class="custom-select__trigger">
-                        <span>اختر العملة</span>
-                        <span class="arrow">▼</span>
+        <div class="content-wrapper">
+            <div class="input-group">
+                <label>المبلغ (Amount)</label>
+                <input type="number" id="amount" class="styled-input" value="1" placeholder="0.00" lang="en">
+            </div>
+
+            <div class="input-group">
+                <label>من (From)</label>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select" id="fromSelect">
+                        <div class="custom-select__trigger">
+                            <span>اختر العملة</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="custom-options"></div>
                     </div>
-                    <div class="custom-options"></div>
+                </div>
+            </div>
+
+            <div class="swap-row">
+                <button class="btn-swap" id="swapBtn">⇄</button>
+            </div>
+
+            <div class="input-group">
+                <label>إلى (To)</label>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select" id="toSelect">
+                        <div class="custom-select__trigger">
+                            <span>اختر العملة</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="custom-options"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="swap-row">
-            <button class="btn-swap" id="swapBtn">⇄</button>
-        </div>
+        <div style="flex-shrink: 0;">
+            <button class="btn-convert" id="convertBtn">
+                <span class="btn-text">Convert Now</span>
+                <div class="loader" id="loader"></div>
+            </button>
 
-        <div class="input-group">
-            <label>إلى (To)</label>
-            <div class="custom-select-wrapper">
-                <div class="custom-select" id="toSelect">
-                    <div class="custom-select__trigger">
-                        <span>اختر العملة</span>
-                        <span class="arrow">▼</span>
-                    </div>
-                    <div class="custom-options"></div>
-                </div>
+            <div class="result-box" id="resultBox">
+                <div class="result-amount" id="resultAmount" lang="en">0.00</div>
+                <div class="rate-display" id="rateDisplay" lang="en">1 USD = --- USD</div>
             </div>
-        </div>
-
-        <button class="btn-convert" id="convertBtn">
-            <span class="btn-text">Convert Now</span>
-            <div class="loader" id="loader"></div>
-        </button>
-
-        <div class="result-box" id="resultBox">
-            <div class="result-amount" id="resultAmount">0.00</div>
-            <div class="rate-display" id="rateDisplay">1 USD = --- USD</div>
         </div>
     </div>
 
@@ -439,8 +497,9 @@
     <script>
         const API_BASE = "https://open.er-api.com/v6/latest/";
 
+        // تغيير العملات الافتراضية
         let selectedFrom = 'USD';
-        let selectedTo = 'EUR';
+        let selectedTo = 'SYP';
 
         const amountInput = document.getElementById('amount');
         const convertBtn = document.getElementById('convertBtn');
@@ -452,7 +511,6 @@
         const rateDisplay = document.getElementById('rateDisplay');
         const toast = document.getElementById('toast');
 
-        // --- قاموس الترجمة العربية ---
         const arabicNames = {
             AED: "درهم إماراتي", AFN: "أفغاني", ALL: "ليك ألباني", AMD: "درام أرميني", ANG: "جيلدر هولندي", AOA: "كوانزا أنغولي", ARS: "بيزو أرجنتيني", AUD: "دولار أسترالي", AWG: "جيلدر أروبي", AZN: "مانات أذربيجاني",
             BAM: "مارك قابل للتحويل", BBD: "دولار بربادوسي", BDT: "تاكا بنغلاديشي", BGN: "ليف بلغاري", BHD: "دينار بحريني", BIF: "فرنك بروندي", BMD: "دولار برمودي", BND: "دولار بروني", BOB: "بوليفيانو", BRL: "ريال برازيلي", BSD: "دولار بهامي", BTC: "بيتكوين", BTN: "نغلتروم بوتاني", BWP: "بولا بوتسواني", BYN: "روبل بلاروسي", BZD: "دولار بليزي",
@@ -461,7 +519,7 @@
             EGP: "جنيه مصري", ERN: "ناقفا إريتري", ETB: "بير إثيوبي", EUR: "يورو",
             FJD: "دولار فيجي", FKP: "جنيه جزر فوكلاند", GBP: "جنيه إسترليني", GEL: "لاري جورجي", GGP: "جنيه غرنزي", GHS: "سيدي غاني", GIP: "جنيه جبل طارق", GMD: "دالاسي غامبي", GNF: "فرنك غيني", GTQ: "كيتزال غواتيمالي", GYD: "دولار غيانا",
             HKD: "دولار هونغ كونغي", HNL: "لمبيرا هندوراسية", HRK: "كونا كرواتية", HTG: "غورد هايتي", HUF: "فورنت مجري",
-            IDR: "روبية إندونيسية", ILS: "شيكل إسرائيلي جديد", IMP: "جنيه مان", INR: "روبية هندية", IQD: "دينار عراقي", IRR: "ريال إيراني", ISK: "كرونة آيسلندية", JEP: "جنيه جيرسي", JMD: "دولار جامايكي", JOD: "دينار أردني", JPY: "ين ياباني",
+            IDR: "روبية إندونيسية", IMP: "جنيه مان", INR: "روبية هندية", IQD: "دينار عراقي", IRR: "ريال إيراني", ISK: "كرونة آيسلندية", JEP: "جنيه جيرزي", JMD: "دولار جامايكي", JOD: "دينار أردني", JPY: "ين ياباني",
             KES: "شلن كيني", KGS: "سوم قرغيزستاني", KHR: "رييل كمبودي", KMF: "فرنك قمري", KPW: "وون كوري شمالي", KRW: "وون كوري جنوبي", KWD: "دينار كويتي", KYD: "دولار جزر كايمان", KZT: "تينغ كازاخستاني",
             LAK: "كيب لاوسي", LBP: "ليرة لبنانية", LKR: "روبية سريلانكية", LRD: "دولار ليبيري", LSL: "لوتي ليسوتو", LYD: "دينار ليبي",
             MAD: "درهم مغربي", MDL: "ليو مولدوفي", MGA: "أرياري مدغشقري", MKD: "دينار مقدوني", MMK: "كيات ميانماري", MNT: "توغريك منغولي", MOP: "باتاكا ماكاوي", MRU: "أوقية موريتانية", MUR: "روبية موريشيوسية", MVR: "روفيية مالديفية", MWK: "كواشا ملاوي", MXN: "بيزو مكسيكي", MYR: "رينغيت ماليزي", MZN: "ميتكال موزمبيقي",
@@ -510,36 +568,35 @@
         });
 
         function initCustomSelects(currencies) {
-            const codes = Object.keys(currencies).sort();
+            const codes = Object.keys(currencies).filter(code => code !== 'ILS').sort();
             
-            // --- الدالة المحسنة لجلب الصور المناسبة ---
             const getIconUrl = (code) => {
-                // 1. المعادن الثمينة
-                if (code === 'XAU') return 'https://cdn-icons-png.flaticon.com/512/6146/6146333.png'; // Gold Bar
-                if (code === 'XAG') return 'https://cdn-icons-png.flaticon.com/512/6146/6146332.png'; // Silver Bar
-                if (code === 'XPT') return 'https://cdn-icons-png.flaticon.com/512/2633/2633551.png'; // Platinum
-                if (code === 'XPD') return 'https://cdn-icons-png.flaticon.com/512/2633/2633548.png'; // Palladium
-                
-                // 2. العملات الرقمية
+                if (code === 'XAU') return 'https://cdn-icons-png.flaticon.com/512/6146/6146333.png';
+                if (code === 'XAG') return 'https://cdn-icons-png.flaticon.com/512/6146/6146332.png';
+                if (code === 'XPT') return 'https://cdn-icons-png.flaticon.com/512/2633/2633551.png';
+                if (code === 'XPD') return 'https://cdn-icons-png.flaticon.com/512/2633/2633548.png';
                 if (code === 'BTC') return 'https://cryptologos.cc/logos/bitcoin-btc-logo.png';
                 if (code === 'ETH') return 'https://cryptologos.cc/logos/ethereum-eth-logo.png';
-
-                // 3. رموز خاصة واتحادات نقدية
-                if (code === 'XDR') return 'https://cdn-icons-png.flaticon.com/512/3550/3550317.png'; // IMF / Global
+                if (code === 'XDR') return 'https://cdn-icons-png.flaticon.com/512/3550/3550317.png';
                 if (code === 'XAF' || code === 'XOF' || code === 'XCD' || code === 'XPF') {
-                    return 'https://cdn-icons-png.flaticon.com/512/2693/2693502.png'; // Bank/Coin icon for regions
+                    return 'https://cdn-icons-png.flaticon.com/512/2693/2693502.png';
                 }
                 if (code.startsWith('X') && code !== 'XXX') {
-                     return 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'; // Generic Global/Coin
+                     return 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
                 }
-
-                // 4. الدول العادية
                 const countryCode = code.substring(0, 2).toLowerCase();
                 return `https://flagcdn.com/w40/${countryCode}.png`;
             };
 
             const createListHTML = () => {
-                return codes.map(code => {
+                let closeBtn = `<div class="close-modal">✕ إغلاق</div>`;
+                // إضافة حقل البحث
+                let searchHTML = `
+                <div class="currency-search-container">
+                    <input type="text" class="currency-search" placeholder="بحث (اسم أو رمز)...">
+                </div>`;
+                
+                let list = codes.map(code => {
                     const engName = currencies[code];
                     const araName = arabicNames[code] || engName;
                     const iconUrl = getIconUrl(code);
@@ -554,6 +611,7 @@
                         </span>
                     `;
                 }).join('');
+                return closeBtn + searchHTML + list;
             };
 
             const listHTML = createListHTML();
@@ -561,8 +619,9 @@
             setupCustomSelect('fromSelect', listHTML, (val) => { selectedFrom = val; });
             setupCustomSelect('toSelect', listHTML, (val) => { selectedTo = val; });
 
+            // تعيين القيم الافتراضية الجديدة
             selectOption('fromSelect', 'USD');
-            selectOption('toSelect', 'XAU'); // الافتراضي ذهب للتجربة
+            selectOption('toSelect', 'SYP'); 
         }
 
         function setupCustomSelect(elementId, htmlContent, callback) {
@@ -571,6 +630,26 @@
             const optionsContainer = wrapper.querySelector('.custom-options');
             
             optionsContainer.innerHTML = htmlContent;
+
+            const closeModal = () => {
+                wrapper.classList.remove('open');
+                wrapper.parentElement.style.zIndex = 1;
+            };
+
+            const openModal = () => {
+                wrapper.classList.add('open');
+                wrapper.parentElement.style.zIndex = 1000;
+                optionsContainer.scrollTop = 0;
+                
+                // تنظيف البحث عند الفتح
+                const searchInput = optionsContainer.querySelector('.currency-search');
+                if(searchInput) {
+                    searchInput.value = '';
+                    const options = optionsContainer.querySelectorAll('.custom-option');
+                    options.forEach(opt => opt.style.display = 'flex');
+                    searchInput.focus();
+                }
+            };
 
             wrapper.querySelector('.custom-select__trigger').addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -581,15 +660,35 @@
                     }
                 });
 
-                const isOpen = wrapper.classList.contains('open');
-                if (isOpen) {
-                    wrapper.classList.remove('open');
-                    wrapper.parentElement.style.zIndex = 1;
+                if (wrapper.classList.contains('open')) {
+                    closeModal();
                 } else {
-                    wrapper.classList.add('open');
-                    wrapper.parentElement.style.zIndex = 1000;
+                    openModal();
                 }
             });
+
+            wrapper.querySelector('.close-modal').addEventListener('click', closeModal);
+
+            // منطق البحث
+            const searchInput = optionsContainer.querySelector('.currency-search');
+            if(searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase();
+                    const options = optionsContainer.querySelectorAll('.custom-option');
+                    
+                    options.forEach(opt => {
+                        const code = opt.dataset.value.toLowerCase();
+                        const arName = opt.querySelector('.ar-name').textContent;
+                        
+                        // البحث في الرمز (إنجليزي) أو الاسم (عربي)
+                        if (code.includes(term) || arName.includes(term)) {
+                            opt.style.display = 'flex';
+                        } else {
+                            opt.style.display = 'none';
+                        }
+                    });
+                });
+            }
 
             wrapper.querySelectorAll('.custom-option').forEach(option => {
                 option.addEventListener('click', function() {
@@ -599,14 +698,13 @@
 
                     trigger.innerHTML = `
                         <div style="display:flex; align-items:center;">
-                            <img src="${imgSrc}" class="flag-icon" style="width:20px; height:14px; margin-left:8px;">
+                            <img src="${imgSrc}" class="flag-icon" style="width:18px; height:13px; margin-left:8px;">
                             ${value} - ${araName}
                         </div>
                     `;
 
                     callback(value);
-                    wrapper.classList.remove('open');
-                    wrapper.parentElement.style.zIndex = 1;
+                    closeModal();
                 });
             });
         }
@@ -618,12 +716,12 @@
         }
 
         window.addEventListener('click', function(e) {
-            document.querySelectorAll('.custom-select').forEach(el => {
-                if (!el.contains(e.target)) {
+            if (!e.target.closest('.custom-select')) {
+                document.querySelectorAll('.custom-select').forEach(el => {
                     el.classList.remove('open');
                     el.parentElement.style.zIndex = 1;
-                }
-            });
+                });
+            }
         });
 
         async function performConvert() {
