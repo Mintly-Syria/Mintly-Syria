@@ -4,13 +4,32 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mintly Syria -محول العملات</title>
+    
+    <!-- === SEO & Meta Tags === -->
+    <!-- تحسين العنوان ليظهر بشكل احترافي في جوجل -->
+    <title>Mintly Syria | محول العملات وحاسبة الذهب بالليرة السورية والدولار</title>
+    
+    <!-- الوصف الذي سيظهر أسفل العنوان في نتائج البحث -->
+    <meta name="description" content="موقع Mintly Syria الأسرع لتحويل العملات (ليرة سورية، دولار أمريكي، ليرة تركية) بأحدث أسعار الصرف. يحتوي على حاسبة دقيقة لأسعار الذهب والفضة بعيارات مختلفة (21، 22، 24) وتحديثات لحظية للسوق العالمي.">
+    
+    <!-- كلمات مفتاحية لمساعدة محركات البحث في فهم الموقع -->
+    <meta name="keywords" content="Mintly Syria, تحويل عملات, سعر الصرف, ليرة سورية, سعر الدولار, سعر الذهب, ليرة تركية, صرف عملات, حاسبة الذهب, SYP to USD, سعر الذهب اليوم">
+    
+    <!-- السماح لمحركات البحث بأرشفة الموقع -->
+    <meta name="robots" content="index, follow">
+    
+    <!-- بيانات المشاركة (تظهر عند نشر الرابط على واتساب أو فيسبوك) -->
+    <meta property="og:title" content="Mintly Syria - محول العملات والذهب">
+    <meta property="og:description" content="حول عملاتك بين الليرة السورية والدولار والليرة التركية فوراً. احسب قيمة الذهب بعيار 21 و 22 بدقة.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
     <style>
         /* === متغيرات الألوان === */
         :root {
+            /* Light Mode */
             --bg-body: #f0f2f5;
             --bg-card: #ffffff;
             --bg-header: #ffffff;
@@ -93,28 +112,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .header-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 15px var(--accent-glow);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .header-logo:hover { transform: scale(1.05); }
-
-        .brand-text {
-            font-size: 1.2rem;
-            font-weight: 900;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: none; 
         }
         
         .theme-toggle {
@@ -427,6 +424,58 @@
             transition: all 0.5s;
         }
         .result-box.show { opacity: 1; transform: translateY(0); }
+
+        /* === Styles for Dual Rate (New) === */
+        .dual-result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .rate-card {
+            background: var(--bg-input);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rate-card:hover { transform: translateY(-2px); }
+        
+        .rate-card.buy { border-color: rgba(46, 204, 113, 0.5); } /* Greenish border */
+        .rate-card.sell { border-color: rgba(231, 76, 60, 0.5); } /* Reddish border */
+
+        .rate-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .rate-value {
+            font-size: 1.4rem;
+            font-weight: 900;
+            font-family: var(--font-numbers);
+            direction: ltr;
+            line-height: 1.2;
+        }
+
+        .rate-card.buy .rate-value { color: #2ecc71; text-shadow: 0 0 10px rgba(46, 204, 113, 0.2); } /* Green */
+        .rate-card.sell .rate-value { color: #e74c3c; text-shadow: 0 0 10px rgba(231, 76, 60, 0.2); } /* Red */
+        
+        .single-result-container {
+            width: 100%;
+            padding: 10px 0;
+        }
         
         .result-amount {
             font-size: 2.2rem; 
@@ -638,8 +687,28 @@
                 </button>
 
                 <div class="result-box" id="resultBox">
-                    <div class="result-amount" id="resultAmount" lang="en">0.00</div>
-                    <div class="rate-display" id="rateDisplay" lang="en">1 SYP = --- TRY</div>
+                    
+                    <!-- النتيجة المزدوجة (للدولار فقط) -->
+                    <div id="dualResult" style="display: none; width: 100%;">
+                        <div class="dual-result-grid">
+                            <div class="rate-card sell">
+                                <span class="rate-label">سعر المبيع</span>
+                                <span class="rate-value" id="resSell">0.00</span>
+                            </div>
+                            <div class="rate-card buy">
+                                <span class="rate-label">سعر الشراء</span>
+                                <span class="rate-value" id="resBuy">0.00</span>
+                            </div>
+                        </div>
+                        <div class="rate-display" id="dualRateDisplay" lang="en">1 USD = --- USD</div>
+                    </div>
+
+                    <!-- النتيجة المفردة (للبقية) -->
+                    <div id="singleResult" style="display: none; width: 100%;" class="single-result-container">
+                        <div class="result-amount" id="resultAmount" lang="en">0.00</div>
+                        <div class="rate-display" id="rateDisplay" lang="en">1 SYP = --- TRY</div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -784,9 +853,9 @@
 
         // === الإعدادات الافتراضية ===
         let selectedFrom = 'SYP';
-        let selectedTo = 'TRY';
+        let selectedTo = 'USD'; // Changed default to USD to show feature immediately
         let cachedRates = {}; 
-        let currentGoldPriceUsdPerGram = 0; // متغير عام لحفظ سعر غرام الذهب 24
+        let currentGoldPriceUsdPerGram = 0; 
 
         // DOM Elements
         const amountInput = document.getElementById('amount');
@@ -795,8 +864,15 @@
         const loader = document.getElementById('loader');
         const btnText = document.querySelector('.btn-text');
         const resultBox = document.getElementById('resultBox');
+        
+        // Result Elements
+        const singleResultDiv = document.getElementById('singleResult');
+        const dualResultDiv = document.getElementById('dualResult');
         const resultAmount = document.getElementById('resultAmount');
+        const resBuy = document.getElementById('resBuy');
+        const resSell = document.getElementById('resSell');
         const rateDisplay = document.getElementById('rateDisplay');
+        const dualRateDisplay = document.getElementById('dualRateDisplay');
         const toast = document.getElementById('toast');
 
         // === APIs ===
@@ -878,7 +954,7 @@
 
             setTimeout(() => {
                 selectOption('fromSelect', 'SYP');
-                selectOption('toSelect', 'TRY');
+                selectOption('toSelect', 'USD');
             }, 100);
         }
 
@@ -963,10 +1039,41 @@
                     const rateFrom = rates[selectedFrom] || 1;
                     const rateTo = rates[selectedTo] || 1;
                     const conversionRate = rateTo / rateFrom;
-                    const total = amount * conversionRate;
+                    const totalMarket = amount * conversionRate;
 
                     setTimeout(() => {
-                        animateResult(total, conversionRate);
+                        // === التعديل الجديد: التحقق من الدولار ===
+                        // الشرط: إذا كانت (من) دولار أو (إلى) دولار
+                        const isUSDInvolved = (selectedFrom === 'USD' || selectedTo === 'USD');
+
+                        if (isUSDInvolved) {
+                            // إظهار النتائج المزدوجة
+                            singleResultDiv.style.display = 'none';
+                            dualResultDiv.style.display = 'block';
+
+                            // محاكاة الفرق في السعر (Spread)
+                            const spread = 0.02; // 2% فرق
+                            
+                            const totalSell = totalMarket * (1 - spread/2);
+                            const totalBuy = totalMarket * (1 + spread/2);
+
+                            // تنسيق الأرقام
+                            const formatNum = (num) => new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
+                            
+                            resSell.textContent = formatNum(totalSell);
+                            resBuy.textContent = formatNum(totalBuy);
+                            
+                            const lowRate = conversionRate * (1 - spread/2);
+                            const highRate = conversionRate * (1 + spread/2);
+                            dualRateDisplay.textContent = `1 ${selectedFrom} ≈ ${lowRate.toFixed(5)} - ${highRate.toFixed(5)} ${selectedTo}`;
+
+                        } else {
+                            // إظهار النتيجة العادية (SYP <-> TRY)
+                            singleResultDiv.style.display = 'block';
+                            dualResultDiv.style.display = 'none';
+                            animateResult(totalMarket, conversionRate);
+                        }
+                        
                         resultBox.classList.add('show');
                     }, 200);
                 } else {
