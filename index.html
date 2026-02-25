@@ -4,64 +4,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- === SEO & Meta Tags === -->
-    <!-- رابط مفضل للمساعدة في الترتيب (Canonical) -->
-    <link rel="canonical" href="https://mintly-syria.github.io/" />
-    
-    <!-- العنوان المحسن -->
-    <title>Mintly Syria | محول العملات وحاسبة الذهب بالليرة السورية والدولار</title>
-    
-    <!-- الوصف (Description) - هذا هو النص الذي سيظهر في جوجل -->
-    <meta name="description" content="موقع Mintly Syria الأسرع لتحويل العملات (ليرة سورية، دولار أمريكي، ليرة تركية) بأحدث أسعار الصرف. يحتوي على حاسبة دقيقة لأسعار الذهب والفضة بعيارات مختلفة (21، 22، 24) وتحديثات لحظية للسوق العالمي.">
-    
-    <!-- الكلمات المفتاحية -->
-    <meta name="keywords" content="Mintly Syria, تحويل عملات, سعر الصرف, ليرة سورية, سعر الدولار, سعر الذهب, ليرة تركية, صرف عملات, حاسبة الذهب, SYP to USD">
-    
-    <!-- أيقونة الموقع (Favicon) - ستظهر في تبويب المتصفح -->
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/cCHNC0Ss/Syria.png">
-
-    <!-- === Open Graph (للسوشيال ميديا وبعض محركات البحث) === -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mintly-syria.github.io/">
-    <meta property="og:title" content="Mintly Syria | محول العملات والذهب">
-    <meta property="og:description" content="حول عملاتك بين الليرة السورية والدولار والليرة التركية فوراً. احسب قيمة الذهب بعيار 21 و 22 بدقة.">
-    <!-- الصورة الرئيسية للموقع (ستظهر عند المشاركة) -->
-    <meta property="og:image" content="https://i.postimg.cc/cCHNC0Ss/Syria.png">
-    <meta property="og:locale" content="ar_AR">
-
-    <!-- === Twitter Card === -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mintly Syria">
-    <meta name="twitter:description" content="محول عملات سريع وحاسبة الذهب للسوق السوري.">
-    <meta name="twitter:image" content="https://i.postimg.cc/cCHNC0Ss/Syria.png">
-
-    <!-- === Schema.org (JSON-LD) === -->
-    <!-- هذا الكود يخبر جوجل بشكل رسمي أن هذه صورة الشعار ووصف الموقع -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Mintly Syria",
-      "alternateName": "Mintly SYP",
-      "url": "https://mintly-syria.github.io/",
-      "description": "موقع Mintly Syria الأسرع لتحويل العملات (ليرة سورية، دولار أمريكي، ليرة تركية) بأحدث أسعار الصرف. يحتوي على حاسبة دقيقة لأسعار الذهب والفضة.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://mintly-syria.github.io/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Mintly Syria",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://i.postimg.cc/cCHNC0Ss/Syria.png",
-          "caption": "Mintly Syria Logo"
-        }
-      }
-    }
-    </script>
+    <title>Mintly Syria -محول العملات</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
 
@@ -151,6 +94,28 @@
             display: flex;
             align-items: center;
             gap: 12px;
+        }
+
+        .header-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .header-logo:hover { transform: scale(1.05); }
+
+        .brand-text {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: none; 
         }
         
         .theme-toggle {
@@ -684,7 +649,7 @@
                 <div class="content-wrapper">
                     <div class="input-group">
                         <label>المبلغ (Amount)</label>
-                        <input type="number" id="amount" class="styled-input" value="1000" placeholder="0.00" lang="en" inputmode="decimal">
+                        <input type="number" id="amount" class="styled-input" value="100" placeholder="0.00" lang="en" inputmode="decimal">
                     </div>
 
                     <div class="input-group">
@@ -727,7 +692,7 @@
 
                 <div class="result-box" id="resultBox">
                     
-                    <!-- النتيجة المزدوجة (للدولار فقط) -->
+                    <!-- النتيجة المزدوجة (للدولار فقط -> عملة أخرى) -->
                     <div id="dualResult" style="display: none; width: 100%;">
                         <div class="dual-result-grid">
                             <div class="rate-card sell">
@@ -891,8 +856,8 @@
         };
 
         // === الإعدادات الافتراضية ===
-        let selectedFrom = 'SYP';
-        let selectedTo = 'USD'; // Changed default to USD to show feature immediately
+        let selectedFrom = 'USD'; // الافتراضي الدولار لإظهار الميزة
+        let selectedTo = 'SYP'; 
         let cachedRates = {}; 
         let currentGoldPriceUsdPerGram = 0; 
 
@@ -992,8 +957,8 @@
             setupCustomSelect('toSelect', listHTML, (val) => { selectedTo = val; });
 
             setTimeout(() => {
-                selectOption('fromSelect', 'SYP');
-                selectOption('toSelect', 'USD');
+                selectOption('fromSelect', 'USD');
+                selectOption('toSelect', 'SYP');
             }, 100);
         }
 
@@ -1081,33 +1046,44 @@
                     const totalMarket = amount * conversionRate;
 
                     setTimeout(() => {
-                        // === التعديل الجديد: التحقق من الدولار ===
-                        // الشرط: إذا كانت (من) دولار أو (إلى) دولار
-                        const isUSDInvolved = (selectedFrom === 'USD' || selectedTo === 'USD');
+                        // === التعديل الجديد: التحقق من التحويل من الدولار فقط ===
+                        // الشرط: إذا كانت العملة المصدر (من) هي الدولار
+                        const isConvertingFromUSD = (selectedFrom === 'USD' && selectedTo !== 'USD');
 
-                        if (isUSDInvolved) {
-                            // إظهار النتائج المزدوجة
+                        if (isConvertingFromUSD) {
+                            // إظهار النتائج المزدوجة (مبيع/شراء) للسوق السوري
                             singleResultDiv.style.display = 'none';
                             dualResultDiv.style.display = 'block';
 
-                            // محاكاة الفرق في السعر (Spread)
-                            const spread = 0.02; // 2% فرق
-                            
-                            const totalSell = totalMarket * (1 - spread/2);
-                            const totalBuy = totalMarket * (1 + spread/2);
+                            // حساب الفرق (Spread) الخاص بالسوق السوري
+                            // الليرة السورية لها سبريد عالي، العملات الأخرى أقل
+                            let spreadPercentage = 0.01; // افتراضي 1%
 
-                            // تنسيق الأرقام
+                            if (selectedTo === 'SYP') {
+                                // سوق سوريا: فرق كبير بين سعر الشراء والبيع (حوالي 2-4%)
+                                spreadPercentage = 0.025; // 2.5% فرق إجمالي (1.25% لكل اتجاه)
+                            } else if (selectedTo === 'TRY') {
+                                // الليرة التركية أقل تقلباً
+                                spreadPercentage = 0.015; // 1.5%
+                            }
+                            
+                            // حساب المبالغ بناءً على السبريد
+                            // سعر الشراء (الصراف يشتري منك): أقل
+                            // سعر المبيع (الصراف يبيع لك): أعلى
+                            const totalSell = totalMarket * (1 - spreadPercentage/2);
+                            const totalBuy = totalMarket * (1 + spreadPercentage/2);
+
                             const formatNum = (num) => new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
                             
                             resSell.textContent = formatNum(totalSell);
                             resBuy.textContent = formatNum(totalBuy);
                             
-                            const lowRate = conversionRate * (1 - spread/2);
-                            const highRate = conversionRate * (1 + spread/2);
+                            const lowRate = conversionRate * (1 - spreadPercentage/2);
+                            const highRate = conversionRate * (1 + spreadPercentage/2);
                             dualRateDisplay.textContent = `1 ${selectedFrom} ≈ ${lowRate.toFixed(5)} - ${highRate.toFixed(5)} ${selectedTo}`;
 
                         } else {
-                            // إظهار النتيجة العادية (SYP <-> TRY)
+                            // إظهار النتيجة العادية (للتحويل العكسي أو غير الدولار)
                             singleResultDiv.style.display = 'block';
                             dualResultDiv.style.display = 'none';
                             animateResult(totalMarket, conversionRate);
@@ -1185,14 +1161,9 @@
                 return;
             }
 
-            // 1. حساب سعر غرام الذهب 24k بالدولار
             const price24kUsd = currentGoldPriceUsdPerGram;
-
-            // 2. تعديل السعر حسب العيار المختار
-            // المعادلة: سعر العيار = (العيار / 24) * سعر 24k
             const priceKaratUsd = price24kUsd * (karat / 24);
 
-            // 3. تحويل العملة
             let exchangeRate = 1;
             let currencySymbol = "$";
 
@@ -1206,21 +1177,15 @@
                 currencySymbol = "$";
             }
 
-            // 4. الحساب النهائي
             const totalValue = weight * priceKaratUsd * exchangeRate;
-
-            // 5. عرض النتيجة
             const resultBox = document.getElementById('calc-result-box');
             const resultAmount = document.getElementById('calc-result-amount');
             const currencyLabel = document.getElementById('calc-currency-label');
 
-            // تنسيق الرقم
             let formattedValue;
             if (targetCurrency === 'SYP') {
-                // لليرة السورية نعرض الأرقام الصحيحة لأن الكسور صغيرة جداً
                 formattedValue = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(totalValue);
             } else {
-                // للدولار والليرة التركية نعرض رقمين عشريين
                 formattedValue = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(totalValue);
             }
 
@@ -1262,7 +1227,6 @@
                 }
 
                 if (goldUsdPerOunce && rates['SYP']) {
-                    // تحديث المتغير العام لاستخدامه في الحاسبة
                     currentGoldPriceUsdPerGram = goldUsdPerOunce / 31.1035;
 
                     const sypRate = rates['SYP'];
